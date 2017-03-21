@@ -1,10 +1,11 @@
 {
-	"devDependencies": {
-	"gulp": "latest",
-	"gulp-sass": "latest",
-	"browser-sync": "latest",
-	"gulp-cssmin": "latest",
-	"gulp-rename": "latest",
-	"gulp-sourcemaps": "latest"
-	}
+  "devDependencies": {
+    "browser-sync": "latest",
+    "gulp": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-cssmin": "latest",
+    "gulp-rename": "latest",
+    "gulp-sass": "latest",
+    "gulp-sourcemaps": "latest"
+  }
 }

@@ -6,6 +6,7 @@ var browserSync = require('browser-sync').create();
 var cssmin = require('gulp-cssmin');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
+var autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('serve', function() {
 	browserSync.init({
@@ -25,6 +26,7 @@ gulp.task('sass', function () {
     return gulp.src('./sass/**/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+	.pipe(autoprefixer())
     .pipe(sourcemaps.write(''))
     .pipe(gulp.dest('./css'))
     .pipe(browserSync.stream());
