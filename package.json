@@ -4,6 +4,7 @@
     "gulp": "latest",
     "gulp-autoprefixer": "latest",
     "gulp-cssmin": "latest",
+    "gulp-ruby-haml": "latest",
     "gulp-rename": "latest",
     "gulp-sass": "latest",
     "gulp-sourcemaps": "latest"
