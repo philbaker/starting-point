@@ -1,0 +1,10 @@
+{
+	"devDependencies": {
+	"gulp": "latest",
+	"gulp-sass": "latest",
+	"browser-sync": "latest",
+	"gulp-cssmin": "latest",
+	"gulp-rename": "latest",
+	"gulp-sourcemaps": "latest"
+	}
+}
