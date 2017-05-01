@@ -26,7 +26,7 @@ gulp.task('sass', function () {
   return gulp.src('./scss/**/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(autoprefixer())
+    .pipe(autoprefixer({browsers: ['last 2 versions']}))
     .pipe(sourcemaps.write(''))
     .pipe(gulp.dest('./css'))
     .pipe(browserSync.stream());
