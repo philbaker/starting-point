@@ -1,8 +1,12 @@
 {
   "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
     "browser-sync": "latest",
     "gulp": "latest",
     "gulp-autoprefixer": "latest",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
     "gulp-cssmin": "latest",
     "gulp-ruby-haml": "latest",
     "gulp-rename": "latest",

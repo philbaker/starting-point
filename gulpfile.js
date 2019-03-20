@@ -1,36 +1,51 @@
-'use strict';
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const browserSync = require('browser-sync').create();
+const cssmin = require('gulp-cssmin');
+const rename = require('gulp-rename');
+const concat = require('gulp-concat');
+const sourcemaps = require('gulp-sourcemaps');
+const autoprefixer = require('gulp-autoprefixer');
+const babel = require('gulp-babel');
 
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var browserSync = require('browser-sync').create();
-var cssmin = require('gulp-cssmin');
-var rename = require('gulp-rename');
-var sourcemaps = require('gulp-sourcemaps');
-var autoprefixer = require('gulp-autoprefixer');
+const jsFiles = ['./src/js/main.js'];
 
 gulp.task('serve', function() {
   browserSync.init({
     server: {
-      baseDir: './'
+      baseDir: './',
     },
-    notify: false
+    notify: false,
   });
 });
 
-gulp.task('watch', function () {
-  gulp.watch('./scss/**/*.scss', ['sass']);
-  gulp.watch('*.html').on('change', browserSync.reload);
-});
-
-gulp.task('sass', function () {
-  return gulp.src('./scss/**/*.scss')
-    .pipe(sourcemaps.init())
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+gulp.task('sass', function() {
+  return gulp
+    .src('./src/scss/**/*.scss')
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     .pipe(autoprefixer({browsers: ['last 2 versions']}))
-    .pipe(sourcemaps.write(''))
-    .pipe(gulp.dest('./css'))
+    .pipe(gulp.dest('./dist/css'))
     .pipe(browserSync.stream());
 });
 
-var defaultTasks = ['sass', 'serve', 'watch'];
-gulp.task('default', defaultTasks);
+gulp.task('js', function() {
+  return gulp
+    .src(jsFiles)
+    .pipe(
+      babel({
+        ignore: [`./src/js/vendor`],
+        presets: ['@babel/preset-env'],
+      }),
+    )
+    .pipe(concat('main.js'))
+    .pipe(gulp.dest(`./dist/js`))
+    .pipe(browserSync.stream());
+});
+
+gulp.task('watch', function() {
+  gulp.watch('./src/scss/**/*.scss', gulp.task('sass'));
+  gulp.watch('./src/js/**/*.js', gulp.task('js'));
+  gulp.watch('*.html').on('change', browserSync.reload);
+});
+
+gulp.task('default', gulp.parallel('serve', 'watch'));
